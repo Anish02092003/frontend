@@ -7,7 +7,17 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+type SensorData = {
+  time: string;
+  temperature: number;
+  ph: number;
+  tds: number;
+  turbidity: number;
+};
 
+type Props = {
+  data: SensorData[];
+};
 export default function LineChartDisplay({ data }) {
   return (
     <div>
