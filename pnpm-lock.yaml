@@ -17,12 +17,6 @@ dependencies:
   recharts:
     specifier: 2.15.2
     version: 2.15.2(react-dom@19.0.0)(react@19.0.0)
-  chart.js: 
-      specifier: ^4.4.1
-      version : 4.4.1
-  react-chartjs-2:
-       specifier: ^5.2.0
-       version: 5.2.0
 
 devDependencies:
   '@types/react':
