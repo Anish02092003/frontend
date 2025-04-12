@@ -14,7 +14,7 @@ type SensorData = {
 function App() {
   // ✅ Update the state with the correct type
   const [data, setData] = useState<SensorData[]>([]);
-
+}
 export default function App() {
   const [data, setData] = useState(null);
   const [chartData, setChartData] = useState([]);
