@@ -51,7 +51,7 @@ export default function App() {
   useEffect(() => {
     fetchPredictions(); // Initial fetch
 
-    const interval = setInterval(fetchPredictions, 300000); // Every 5 minutes
+    const interval = setInterval(fetchPredictions, 20000); // Every 5 minutes
     return () => clearInterval(interval);
   }, []);
 
