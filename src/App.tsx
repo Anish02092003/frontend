@@ -1,6 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LineChartDisplay from "./components/LineChartDisplay";
+import { useState } from 'react';
+
+type SensorData = {
+  time: string;
+  temperature: number;
+  ph: number;
+  tds: number;
+  turbidity: number;
+};
+
+function App() {
+  // ✅ Update the state with the correct type
+  const [data, setData] = useState<SensorData[]>([]);
 
 export default function App() {
   const [data, setData] = useState(null);
