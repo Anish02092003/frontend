@@ -1,5 +1,4 @@
-{
-  "name": "react-vite-ts",
+{ "name": "react-vite-ts",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,7 +14,7 @@
     "react-dom": "^19.0.0",
     "recharts": "2.15.2",
     "chart.js": "^4.4.1",
-    "react-chartjs-2":
+    "react-chartjs-2": "5.2.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
