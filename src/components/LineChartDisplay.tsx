@@ -1,12 +1,25 @@
+import React from "react";
+import { Line } from "react-chartjs-2";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
+  Chart as ChartJS,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
   Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+  Legend,
+} from "chart.js";
+
+ChartJS.register(
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Tooltip,
+  Legend
+);
+
+// 1. Define the type for sensor data
 type SensorData = {
   time: string;
   temperature: number;
@@ -15,37 +28,55 @@ type SensorData = {
   turbidity: number;
 };
 
+// 2. Define props for the component
 type Props = {
   data: SensorData[];
 };
-export default function LineChartDisplay({ data }) {
-  return (
-    <div>
-      <h2 className="text-xl font-semibold text-center mb-2">
-        Water Quality Trends
-      </h2>
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="time" />
-          <YAxis />
-          <Tooltip />
-          <Line
-            type="monotone"
-            dataKey="temperature"
-            stroke="#f97316"
-            name="Temperature"
-          />
-          <Line type="monotone" dataKey="ph" stroke="#22c55e" name="pH" />
-          <Line type="monotone" dataKey="tds" stroke="#6366f1" name="TDS" />
-          <Line
-            type="monotone"
-            dataKey="turbidity"
-            stroke="#14b8a6"
-            name="Turbidity"
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
+
+// 3. Add the type to the function definition here 👇
+const LineChartDisplay = ({ data }: Props) => {
+  const chartData = {
+    labels: data.map((point) => point.time),
+    datasets: [
+      {
+        label: "Temperature (°C)",
+        data: data.map((point) => point.temperature),
+        borderColor: "rgba(255, 99, 132, 1)",
+        fill: false,
+      },
+      {
+        label: "pH",
+        data: data.map((point) => point.ph),
+        borderColor: "rgba(54, 162, 235, 1)",
+        fill: false,
+      },
+      {
+        label: "TDS (ppm)",
+        data: data.map((point) => point.tds),
+        borderColor: "rgba(255, 206, 86, 1)",
+        fill: false,
+      },
+      {
+        label: "Turbidity (NTU)",
+        data: data.map((point) => point.turbidity),
+        borderColor: "rgba(75, 192, 192, 1)",
+        fill: false,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: { position: "top" as const },
+    },
+    scales: {
+      y: { beginAtZero: true },
+    },
+  };
+
+  return <Line data={chartData} options={options} />;
+};
+
+// 4. Export it at the bottom
+export default LineChartDisplay;
