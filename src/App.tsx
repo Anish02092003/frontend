@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LineChartDisplay from "./components/LineChartDisplay";
-import { useState } from 'react';
 
 type SensorData = {
   time: string;
@@ -11,19 +10,25 @@ type SensorData = {
   turbidity: number;
 };
 
-function App() {
-  // ✅ Update the state with the correct type
-  const [data, setData] = useState<SensorData[]>([]);
-}
+type PredictionResponse = {
+  temperature: number;
+  ph: number;
+  tds: number;
+  turbidity: number;
+  "Dissolved Oxygen (DO)": number;
+  "Heavy Metal Concentration": string;
+  "Bacterial Contamination": string;
+};
+
 export default function App() {
-  const [data, setData] = useState(null);
-  const [chartData, setChartData] = useState([]);
+  const [data, setData] = useState<PredictionResponse | null>(null);
+  const [chartData, setChartData] = useState<SensorData[]>([]);
   const [lastUpdated, setLastUpdated] = useState("");
 
   const fetchPredictions = async () => {
     try {
       const response = await axios.get("https://water-predictor-backend.onrender.com/predict");
-      const result = response.data;
+      const result: PredictionResponse = response.data;
 
       setData(result);
       setLastUpdated(new Date().toLocaleTimeString());
@@ -46,7 +51,7 @@ export default function App() {
   useEffect(() => {
     fetchPredictions(); // Initial fetch
 
-    const interval = setInterval(fetchPredictions, 300000); // Every 5 mins
+    const interval = setInterval(fetchPredictions, 300000); // Every 5 minutes
     return () => clearInterval(interval);
   }, []);
 
