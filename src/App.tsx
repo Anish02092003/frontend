@@ -57,7 +57,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-2">🌊 Smart Water Quality Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-2">🌊 'AQUAVON'- Water Quality Dashboard</h1>
       <p className="text-gray-600 mb-4">Last updated at: {lastUpdated}</p>
 
       {data ? (
