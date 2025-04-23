@@ -8,7 +8,10 @@ type SensorData = {
   ph: number;
   tds: number;
   turbidity: number;
+  do: number;
+  metal: number; // Ensure this is numeric
 };
+
 
 type PredictionResponse = {
   temperature: number;
